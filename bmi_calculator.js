@@ -8,7 +8,7 @@ function bmiCalculator(weight, height) {
   return bmi;
 }
 
-// test output  ddd
+// test output  ddddddd
 
 let testBMI = bmiCalculator(58, 154);
 
