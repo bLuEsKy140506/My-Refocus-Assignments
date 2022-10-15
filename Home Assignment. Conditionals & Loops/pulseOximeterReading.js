@@ -1,5 +1,5 @@
 // CONDITIONALS
-
+//My First Assignments
 /*
 Task 1. Pulse oximeter reading (part 1)
 You are asked to develop a JavaScript app compatible with smartwatches. You use
