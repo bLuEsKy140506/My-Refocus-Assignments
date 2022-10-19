@@ -136,7 +136,11 @@ function withdrawMoney(
       } else {
         // if not print this message
         console.log(
-          `INSUFFICIENT BALANCE 🥺: The amount try to withdraw is \u20B1${amount} when the balance is only \u20B1${usersAccount[userkey].bankAccount.balance}\n`
+          `INSUFFICIENT BALANCE 🥺: The amount try to withdraw is \u20B1${amount.toFixed(
+            2
+          )} when the balance is only \u20B1${
+            usersAccount[userkey].bankAccount.balance
+          }\n`
         );
       }
     }
