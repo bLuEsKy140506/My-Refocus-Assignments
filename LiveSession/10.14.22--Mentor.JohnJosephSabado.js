@@ -62,7 +62,7 @@ function palindrome(string) {
   //first --> split the string into array of single string
   //second --> reverse built-in method which reverse the order of the array elements
   //third -- > join the array element into 1 string
-  //fourth --> strong into a variable called reverseStr
+  //fourth --> put into a variable called reverseStr
 
   return reverseStr === lowRegStr
     ? console.log(`Yes, the string ${string} is a palindrome.`)
