@@ -81,12 +81,14 @@ function palindrome2(string) {
   var len = lowRegStr.length;
   var result = true;
 
-  for (var i = 0; i < len; i++) {
+  //for (var i = 0; i < len; i++) {
+  for (var i = 0; i < len / 2; i++) {
+    //for me, to make it more efficient this len variable should be divided 2
     // console.log(
     //   `${lowRegStr[i]} ${i} --- ${lowRegStr[len - 1 - i]} ${len - 1 - i}`
     // );
     if (lowRegStr[i] !== lowRegStr[len - 1 - i]) {
-      return false;
+      result = false;
     }
   }
 
@@ -95,7 +97,7 @@ function palindrome2(string) {
     : console.log(`No, this is not a PALINDROME`); // checking if it is equ
 }
 
-palindrome2("Madam");
+palindrome2("Madfam");
 
 console.log("\nCASE#2----------------end PALINDROM STRINGS-------\n");
 
