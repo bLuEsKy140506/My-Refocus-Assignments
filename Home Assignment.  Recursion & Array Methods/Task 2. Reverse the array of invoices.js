@@ -23,111 +23,73 @@ The result of calling the second function should look like this string:
 Invoice 008 Invoice 007 Invoice 006 Invoice 005 Invoice 004 Invoice 003
 Invoice 002 Invoice 001
 
-Hint
-Complete the code below to solve the case.
+*/
+/* ############################ ADDITIONAL HINT BY MENTOR BY Jian Jaico Cajita #####################
+Thanks for your submission for Home Assignment. Recursion & Array Methods in Web Developer. It didn’t quite meet the requirements for this assignment. Let’s give it another go!
 
- InvoiceList = [
- "Invoice 008", 
- "Invoice 007", 
- "Invoice 006",
- "Invoice 005"];
+I'll answer your questions:
+1. Sir, honestly I don't get this logic, when we can just directly state this code below:
+ - The array push method yes you are right, but however the task description said 
+   that we need to add recursive functionalities within this functions. 
+    So that is why you need to make a 
+ ----> same flow of an array.push but your own code <-----
 
- insertToBottom() {
- ...
-}
- reverseList() {
- ...
+2. Sir why this happened?
+- The forEach method of array is actually runs same as a for loop. 
+forEach method will loop through your elements, however in your code you put the 
+result in a temporary object then push it again in an array. 
+This will take too long, not really suitable logic/algorithm. 
+----->Aslo in the reverseStack function you also need to make it a recursive function.<------
 
-}
-
-InvoiceList.push("Invoice 004");
-InvoiceList.push("Invoice 003");
-InvoiceList.push("Invoice 002");
-InvoiceList.push("Invoice 001");
-
-console.log(InvoiceList.join(" "));
-reverseList();
-console.log(InvoiceList.join(" ")); 
+I know it is too much, but we will breakdown how we can achieve this assignment. Just message me.
+###################################################################################################### 
 */
 
-InvoiceList = [
+let InvoiceList = [
   "Invoice 008",
-  "Invoice 037",
-  "Invoice 106",
-  "Invoice 005",
-  "Invoice 203",
-  "Invoice 103", // for testing
+  "Invoice 007",
+  "Invoice 006",
+  "Invoice 005", // for testing
 ];
 
-const objectBinder = {};
+insertToBottom(InvoiceList)("Invoice 004"); //This will be equivalent to InvoiceList.push("Invoice 004");
+insertToBottom(InvoiceList)("Invoice 003"); //This will be equivalent to InvoiceList.push("Invoice 003");
+insertToBottom(InvoiceList)("Invoice 002"); //This will be equivalent to InvoiceList.push("Invoice 002");
+insertToBottom(InvoiceList)("Invoice 001"); //This will be equivalent to InvoiceList.push("Invoice 001");
 
-InvoiceList.push("Invoice 004");
-InvoiceList.push("Invoice 003");
-InvoiceList.push("Invoice 002");
-InvoiceList.push("Invoice 001");
-InvoiceList.push("Invoice 108"); // for testing
-
-console.log("UNSORTED");
 console.log(InvoiceList.join(" "));
 
-insertToBottom();
+console.log(reverseStack(InvoiceList).join(" ")); //This will be equivalent to InvoiceList.reverse();
 
-console.log("\nSORTED");
-console.log(InvoiceList.join(" "));
-
-reverseList();
-
-console.log("\nREVERSED");
-console.log(InvoiceList.join(" "));
-
-/*
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+/*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
                            FUNCTION DEFINITION
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-*/
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*/
 
 //insertToBottom() ----> which adds invoices at the bottom of the list
-/* MSG TO MENTOR ---> Sir, honestly I don't get this logic, when we can just directly state this code below:
 
-InvoiceList.push("Invoice 004");
-InvoiceList.push("Invoice 003");
-InvoiceList.push("Invoice 002");
-InvoiceList.push("Invoice 001");
-
-*/
-// The content of this function directly answer what being ask in the statement below. Sorting documents using first in, first out” method.
-
-// You work as a Web Developer at a big company. The invoicing department
-// is having a hard time sorting their documents using the “first in, first out” method.
-// The “first in, first out” method means that the invoices that came the earliest
-// must be also paid earlier than the others.
-
-// As per my observation in real life, logically speaking the invoice receipt number reflect the chronological order it was processed
-// for example we can say that Invoice 001 is the earliest and Invoice 999 would the latest on the invoice receipt.
-function insertToBottom() {
-  InvoiceList.forEach((element) => {
-    let numericValue;
-    let re = /\D/g; // determine non-digit character
-    numericValue = Number(element.replace(re, "")); // extract the number and assigned to object KEY.
-    objectBinder[numericValue] = element; //to object container
-  });
-  //as per observation --- using forEach method then dynamically add each element(key,value) to an empty object
-  //the end result is automatically sorted (like this, sorted from least to greatest)
-
-  /* MSG to MENTOR --> Sir why this happened? */
-
-  //console.log(objectBinder);
-
-  const correctList = []; //store the just the values to an temporary array, since its already arrange automatically
-  for (const items of Object.values(objectBinder)) {
-    correctList.push(items);
+//console.log(InvoiceList[6]);
+function insertToBottom(array) {
+  let len = 0;
+  function ePushMoTe(element) {
+    //RECURSION FUNCTIONALITY ----
+    if (array[len] === undefined) array[len] = element;
+    //base of the recursion, it will stop when we reach undefined
+    else {
+      len += 1; //increment
+      return ePushMoTe(element); //recurse
+    }
   }
-
-  InvoiceList = correctList; //overwriting the invoiceList, just to follow the hint provided ^_^.
+  return ePushMoTe;
 }
 
-//reverseStack() ---> which reverses the order of the invoices
+// //reverseStack() ---> which reverses the order of the invoices
 
-function reverseList() {
-  InvoiceList.reverse();
+function reverseStack(list) {
+  // RECURSION FUNCTIONALITY ------------------------
+  if (list.length === 0) return list; //recursion base (its stop when the length of list is 0)
+  return reverseStack(list.slice(1)).concat(list[0]); //recurse (slice 1st position (1 length) then concatenate it the last part)
 }
+
+//console.log(InvoiceList); //the array doesn't mutate/change
+//const reversed = reverseStack(InvoiceList); //but it can be store in a variable array
+//console.log(reversed.join(" "));//display
